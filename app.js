@@ -1,35 +1,31 @@
-//Andmetüübid
+//tüübiteisendused
 
-//Primitives
+let val;
 
-// tekst
-const name = 'Kadi Tamm';
+// nubmer -> string
+val = String(555);
+val = String(4+4);
+val = String(5.6);
 
-//numbrid
-const age = 15;
-const heighy = 1.75;
+//boolean -> string
+val = String(true);
 
-//tõeväärtused - true ja false
-const hasKids = false;
+//object -> string
+val = String(new Date())
 
-//null
+// array -> string
+val = String([1, 2, 3, 4]);
 
-const hasAirplane = null;
+// toString()
+val = (5).toString();
 
-let test;
+// string -> number
+val = Number('5');
+val = Number('5.6');
+val = Number(true);
+val = Number(null);
+val = Number('tere');
+val = Number([1, 2, 3])
 
-//Reference types
 
-//massiiv
-const hobbies = ['music', 'sport'];
-
-//objekt
-const person = {
-	name: 'Kadi',
-	age: 15
-};
-
-const today = new Date();
-
-console.log(age);
-console.log(typeof age);
+console.log(val);
