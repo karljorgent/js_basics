@@ -1,28 +1,35 @@
-// 1 rida
+//Andmetüübid
 
-/*
-mitu
-rida
-*/
+//Primitives
 
-//muutuja mille sisu saab muuta
-let name = 'Jörgen';
+// tekst
+const name = 'Kadi Tamm';
 
-name = 'Bob'
+//numbrid
+const age = 15;
+const heighy = 1.75;
 
-//muutuja, mis on konstantne
-const surName = 'Tamm'
+//tõeväärtused - true ja false
+const hasKids = false;
 
-//massiivid
+//null
 
-const numbers = [1, 2, 3, 4]
-numbers.push(6)
+const hasAirplane = null;
 
-// objektid
+let test;
+
+//Reference types
+
+//massiiv
+const hobbies = ['music', 'sport'];
+
+//objekt
 const person = {
 	name: 'Kadi',
-	age: 20,
-}
-person.age = 21
+	age: 15
+};
 
-console.log(person)
+const today = new Date();
+
+console.log(age);
+console.log(typeof age);
