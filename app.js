@@ -1,77 +1,30 @@
-/*
-if(tingimus) {
-	//if tegevused
-} else {
-	// else tegevused
-}
-*/
+let color = 'red'
 
-const id = 100
-
-// võrdub - ==
-// ei võrdu !=
-// võrdub + tüübikontroll - ===
-// ei võrdu + tüübikontroll - !==
-
-if(id == 100) {
-	console.log('OK');
-} else {
-	console.log('NOT OK');
+switch(color){
+	case 'red':
+		console.log('Stop!');
+		break;
+	case 'yellow':
+		console.log('Attention!');
+		break;
+	case 'green':
+		console.log('GO!');
+		break;
+	default:
+		console.log('This color is not allowed!');
+		break;
 }
 
-let testId;
-if(testId !== 'undefined') {
-	console.log('id is ok');
-} else {
-	console.log('id is not exist')
-}
+date = new Date();
+weekDay = date.getDay();
+let day;
 
-// > ja <
-
-if(id > 100) {
-	console.log('id is greater than 100');
-} else {
-	console.log('id is equal 100 and less that');
-}
-
-// if - else if - else
-
-let color = 'red';
-
-if(color==='red') {
-	console.log('Stop!')
-} else if(color ==='yellow') {
-	console.log('Attention!');
-} else if(color === 'green') {
-	console.log('Go!');
-} else {
-	console.log('This color is not allowed');
-}
-
-//and - &&
-//or - ||
-
-let name = 'Kadi';
-let age = 70;
-
-if(age > 0 && age < 12) {
-	console.log(`${name} on laps`);
-} else if(age > 0 && age < 12) {
-	console.log(`${name} on nooruk`);
-} else {
-	console.log(`${name} on täiskasvanu`);
-}
-
-if(age < 18 || age > 65) {
-	console.log(`${name} ei sa registeerida`);
-} else {
-	console.log(`${name} saab registeerida`);
-}
-
-// ? - ternary operator
-console.log(id === 100 ? 'OK' : 'NOT OK')
-
-if(id === 100) 
-	console.log('OK');
-else
-	console.log('NOT');
+if(weekDay === 1) day = 'Esmaspäev';
+else if(weekDay === 2) day = 'Teisipäev';
+else if(weekDay === 3) day = 'Kolmapäev';
+else if(weekDay === 4) day = 'Neiljapäev';
+else if(weekDay === 5) day = 'Reede';
+else if(weekDay === 6) day = 'Laupäev';
+else if(weekDay === 0) day = 'Pühapäev';
+else console.log('Miskit lappes ei vä?')
+console.log(day)
