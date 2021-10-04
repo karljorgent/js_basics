@@ -1,19 +1,20 @@
 let val;
+// elementide loomine
+const li = document.createElement('li');
+// klassi määramine
+li.className = 'collection-item';
+// teksi lisamine
+li.appendChild(document.createTextNode('Study JS element creation'));
 
-val = document.getElementById('task-title');
+// kodune töö
+// loo link X näitamiseks
+// ja lisa li sisse
+// siin peab olema sinu kood
+const a = document.createElement('a');
+a.className = 'secondary-content';
+a-appendChild(document.createTextNode('X'))
+li.appendChild(a)
 
-document.getElementById('task-title').style.background = '#333';
-document.getElementById('task-title').style.color = '#fff';
-document.getElementById('task-title').style.padding = '5 px';
-
-document.getElementById('task-title').textContent = 'My Tasks';
-document.getElementById('task-title').innerText = 'My Favorite Tasks';
-document.getElementById('task-title').innerHTML = '<span style="color: red">My Tasks</span>'
-
-val = document.querySelector('h4');
-val = document.querySelector('#task-title');
-val = document.querySelector('.collection-item');
-val = document.querySelector('.collection-item:nth-child(even)');
-val = document.querySelector('.collection-item:nth-child(even)');
-
-console.log(val);
+// lisame li element ul-sse
+const ul = document.querySelector('ul');
+ul.appendChild(li);
