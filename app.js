@@ -4,10 +4,14 @@ const taskInput = document.querySelector('#task');
 const list = document.querySelector('ul');
 const remove = document.querySelector('#remove-all')
 
+const filterInput = document.querySelector('#filter')
+
 list.addEventListener('click', removeTask)
 form.addEventListener('submit', addTask);
 remove.addEventListener('click', removeAll)
 document.addEventListener('DOMContentLoaded', getTasksFromLS)
+filterInput.addEventListener('keyup'. filterTasks)
+
 
 function addTask(e) {
 	const li = document.createElement('li');
@@ -99,5 +103,19 @@ function getTasksFromLS(e) {
 		list.appendChild(li);
 	});
 
-	localStorage.setItem('tasks', JSON.stringify(tasks))
+	localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function filterTaks(e) {
+	const text = e.target.value.toLowerCase();
+	const tasks = document.querySelectorAll('li');
+	tasks.forEach(function(li) {
+		const task = li.firstChild.textContent.toLowerCase();
+		if(task.indexOf(text) != -1){
+			li.style.display = 'block';
+		} else {
+			li.style.display = 'none';
+		}
+	});
+
 }
