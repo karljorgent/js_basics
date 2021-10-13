@@ -7,6 +7,7 @@ const remove = document.querySelector('#remove-all')
 list.addEventListener('click', removeTask)
 form.addEventListener('submit', addTask);
 remove.addEventListener('click', removeAll)
+document.addEventListener('DOMContentLoaded', getTasksFromLS)
 
 function addTask(e) {
 	const li = document.createElement('li');
@@ -73,5 +74,30 @@ function removeTaskFromLS(task) {
 			tasks.splice(tasksIndex, 1);
 		}
 	});
+	localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+function getTasksFromLS(e) {
+	let tasks;
+	if(localStorage.getItem('tasks') === null){
+		tasks = [];
+	} else {
+		tasks = JSON.parse(localStorage.getItem('tasks'))
+	}
+	tasks.forEach(function(tasksElement){
+		const li = document.createElement('li');
+	
+		li.className = 'collection-item';
+		li.appendChild(document.createTextNode(tasksElement));
+
+		const link = document.createElement('a');
+		link.className = 'secondary-content';
+		link.appendChild(document.createTextNode('X'));
+		link.setAttribute('href', '#');
+
+		li.appendChild(link);
+		list.appendChild(li);
+	});
+
 	localStorage.setItem('tasks', JSON.stringify(tasks))
 }
