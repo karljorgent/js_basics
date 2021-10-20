@@ -1,121 +1,30 @@
-// event elements
-const form = document.querySelector('form');
-const taskInput = document.querySelector('#task');
-const list = document.querySelector('ul');
-const remove = document.querySelector('#remove-all')
+ui = new UI();
+ls = new LS();
 
-const filterInput = document.querySelector('#filter')
+const form = document.querySelector("form");
+const taskInput = document.querySelector("#task");
+const taskList = document.querySelector('ul');
+taskList.addEventListener('click', deleteTask)
 
-list.addEventListener('click', removeTask)
-form.addEventListener('submit', addTask);
-remove.addEventListener('click', removeAll)
-document.addEventListener('DOMContentLoaded', getTasksFromLS)
-filterInput.addEventListener('keyup'. filterTasks)
-
+form.addEventListener("submit", addTask);
 
 function addTask(e) {
-	const li = document.createElement('li');
-	
-	li.className = 'collection-item';
-	li.appendChild(document.createTextNode(taskInput.value));
+	const task = new Task(taskInput.value);
 
-	const link = document.createElement('a');
-	link.className = 'secondary-content';
-	link.appendChild(document.createTextNode('X'));
-	link.setAttribute('href', '#');
+	ui.addTask(task);
 
-	li.appendChild(link);
-	list.appendChild(li);
-
-	addTaskToLS(taskInput.value)
-	
-
-	taskInput.value = '';
-
+	ls.addTask(task);
 	e.preventDefault();
 }
 
-list.addEventListener('click', removeTask)
-
-
-function removeTask(e) {
-	if(e.target.textContent == 'X'){
-		if(confirm('Are you sure about that?')) {
-			list.removeChild(e.target.parentNode);
-
-			removeTaskFromLS(e.target.parentElement.firstChild.textContent)
-		}
-	}
+function deleteTask(e) {
+	let task = e.target.parentElement.firstChild
+	ui.deleteTask(task)
+	task = task.textContent
+	ls.deleteTask()
 }
 
-function removeAll() { 
-	while (list.firstChild) {
-		list.removeChild(list.firstChild)
-	}
-	localStorage.clear()
-}
-
-function addTaskToLS(task) {
-	let tasks;
-	if(localStorage.getItem('tasks') === null){
-		tasks = [];
-	} else {
-		tasks = JSON.parse(localStorage.getItem('tasks'))
-	}
-	tasks.push(task);
-	localStorage.setItem('tasks', JSON.stringify(tasks))
-}
-
-function removeTaskFromLS(task) {
-	let tasks;
-	if(localStorage.getItem('tasks') === null){
-		tasks = [];
-	} else {
-		tasks = JSON.parse(localStorage.getItem('tasks'))
-	}
-	tasks.forEach(function(tasksElement, tasksIndex){
-		if(tasksElement === task){
-			tasks.splice(tasksIndex, 1);
-		}
-	});
-	localStorage.setItem('tasks', JSON.stringify(tasks))
-}
-
-function getTasksFromLS(e) {
-	let tasks;
-	if(localStorage.getItem('tasks') === null){
-		tasks = [];
-	} else {
-		tasks = JSON.parse(localStorage.getItem('tasks'))
-	}
-	tasks.forEach(function(tasksElement){
-		const li = document.createElement('li');
-	
-		li.className = 'collection-item';
-		li.appendChild(document.createTextNode(tasksElement));
-
-		const link = document.createElement('a');
-		link.className = 'secondary-content';
-		link.appendChild(document.createTextNode('X'));
-		link.setAttribute('href', '#');
-
-		li.appendChild(link);
-		list.appendChild(li);
-	});
-
-	localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function filterTaks(e) {
-	const text = e.target.value.toLowerCase();
-	const tasks = document.querySelectorAll('li');
-	tasks.forEach(function(li) {
-		const task = li.firstChild.textContent.toLowerCase();
-		if(task.indexOf(text) != -1){
-			li.style.display = 'block';
-		} else {
-			li.style.display = 'none';
-		}
-	});
-
+function getTasks(e) {
+	tasks = ls.getData('tasks');
+	ui.getTasks(tasks)
 }
