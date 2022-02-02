@@ -1,34 +1,44 @@
 class UI {
-	addUIelement(elementname, classname = '', textcontent = '', atributes={}){
-		const element = document.createElement(elementname);
-		element.className = classname;
-		element.appendChild(document.createTextNode(textcontent));
+	addUIelement(book = '', author = '', isbn = '', atributes={}){
+		let bookList = document.getElementById('books').getElementsByTagName('tbody')[0];
+		let row = bookList.insertRow();
+		let cell1 = row.insertCell(0)
+		let cell2 = row.insertCell(1)
+		let cell3 = row.insertCell(2)
+		let cell4 = row.insertCell(3)
+		cell1.innerHTML = book
+		cell2.innerHTML = author
+		cell3.innerHTML = isbn
+
+		const element = document.createElement('a');
+		element.className = 'secondary-content';
+		element.appendChild(document.createTextNode('X'))
 		if(Object.keys(atributes).length > 0){
 			for(let key in atributes){
 				element.setAttribute(key, atributes[key]);
 			}
 		}
-		return element
+		cell4.appendChild(element)
 	}
 	addTask(task) {
-		const li = this.addUIelement('li', 'collection-item', task.name)
-		const link = this.addUIelement('a', 'secondary-content', 'X', {'href':'#'});
+		const li = this.addUIelement(taskInput.value, authorInput.value, isbnInput.value, {'href':'#'})
 
-		li.appendChild(link);
+		const inputTitle = document.querySelector("#task");
+		inputTitle.value = "";
 
-		const list = document.querySelector("ul");
-		list.appendChild(li);
+		const inputAuthor = document.querySelector("#author");
+		inputAuthor.value = "";
 
-		const input = document.querySelector("#task");
-		input.value = "";
+		const inputISBN = document.querySelector("#isbn");
+		inputISBN.value = "";
 
 		task.addedToUI(); 
 	}
 	deleteTask(task){
-		const deleteIcon = task.nextSibling;
+		const deleteIcon = task;
 		if(deleteIcon.textContent == "X"){
 			if(confirm('Do you want to delete this task?')) {
-				task.parentElement.remove();
+				task.parentElement.parentElement.remove();
 			}
 		}
 	}
@@ -41,15 +51,7 @@ class UI {
 
 	getTasks(tasks){
 		for(let i = 0; i < tasks.length; i++){
-			const li = this.addUIelement('li', 'collection-item', tasks[i].name)
-
-			const link = this.addUIelement('a', 'secondary-content', 'X', {'href':'#'});
-
-			li.appendChild(link);
-
-			const list = document.querySelector('ul');
-			list.appendChild(li);
+		const li = this.addUIelement(tasks[i].name, tasks[i].author, tasks[i].isbn, {'href':'#'})
 		}
 	}
 }
-
